@@ -1,0 +1,44 @@
+body {
+    background-color: #F2EFE5;
+    font-family: Arial, sans-serif;
+}
+
+
+#show1 {
+    color: #070F2B;
+    margin-left: 5%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    font-weight: bold;
+}
+
+button {
+    background-color: #E3E1D9;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#date {
+    background-color: #E3E1D9;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#show2 {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+#dd_departure {
+    background-color: #E3E1D9;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 40%;
+}
+
+#dd_arrival {
+    background-color: #E3E1D9;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 40%;
+}
