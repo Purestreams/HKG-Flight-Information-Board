@@ -1,13 +1,13 @@
 const yesterday = new Date();
 const year = new Date();
 yesterday.setDate(yesterday.getDate() - 1);
-year.setDate(year.getDate() - 364);
+year.setDate(year.getDate() - 91);
 const formattedYesterday = yesterday.toISOString().split('T')[0];
 const formattedLastYear = year.toISOString().split('T')[0];
 
 window.onload = function() {
-    document.getElementById("date").max=formattedYesterday;
-    document.getElementById("date").min=formattedLastYear;
+    //document.getElementById("date").max=formattedYesterday;
+    //document.getElementById("date").min=formattedLastYear;
     processiata("PVG");
 } 
 
@@ -21,9 +21,28 @@ searchClick = function() {
     document.getElementById("show1").innerHTML = "";
     document.getElementById("show2").innerHTML = "";
     if (document.getElementById("date").value === "") {
-        alert("Please enter a date");
+        //alert("Please enter a date");
+        //show a message above the date input form
+        document.getElementById("888").innerHTML = "Please enter a date";
+        setTimeout(function() {
+            document.getElementById("888").innerHTML = "";
+        }, 2000);
     }
     else {
+        if (document.getElementById("date").value < formattedLastYear) {
+            document.getElementById("888").innerHTML = "Please enter a date within the last 90 days";
+            setTimeout(function() {
+                document.getElementById("888").innerHTML = "";
+            }, 2000);
+            return;
+        }
+        else if (document.getElementById("date").value > formattedYesterday) {
+            document.getElementById("888").innerHTML = "Please enter a date within yesterday";
+            setTimeout(function() {
+                document.getElementById("888").innerHTML = "";
+            }, 2000);
+            return;
+        }
         var date_given = new Date(document.getElementById("date").value);
         var date_given_yesterday = new Date(date_given);
         date_given_yesterday.setDate(date_given_yesterday.getDate() - 1);
@@ -39,7 +58,6 @@ searchClick = function() {
 
         getFlights_arrival();
         getFlights_departure();
-
     }
 }
 
@@ -167,7 +185,7 @@ rendorStatistics_arrival = function(flightsData) {
     }
 
     var number_of_origin = Object.keys(originCounts).filter(function(key) {
-        return originCounts[key] > 1;
+        return originCounts[key] > 0;
     }).length;
     var topOrigins = Object.keys(originCounts).sort(function(a, b) {
         return originCounts[b] - originCounts[a];
@@ -485,7 +503,7 @@ rendorStatistics_departure = function(flightsData) {
 
 
     var number_of_destinations = Object.keys(destinationCounts).filter(function(key) {
-        return destinationCounts[key] > 1;
+        return destinationCounts[key] > 0;
     }).length;
     var topDestinations = Object.keys(destinationCounts).sort(function(a, b) {
         return destinationCounts[b] - destinationCounts[a]
